@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+</head>
+
+<body>
+
+
+<script>
+function testEncode(form) {
+	seed = 1;
+	newStr = encode(form.passwordField.value, seed)
+	document.location = newStr+".html"
+}
+function encode(inStr, seed){
+	seed = parseInt(seed);
+	var char, index, newIndex, outStr="";
+	var refStr="0123456789abcdefghijklmnopqrstuvwxyz._~ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	for (var i=0; i<inStr.length; i++) {
+		char = inStr.substring(i, i+1)
+		index = refStr.indexOf(char)
+		newIndex = index^seed;		// ^: bitwise xor operator
+		outStr += refStr.substring(newIndex, newIndex+1);
+	}
+	return (outStr)
+}
+</script>
+<form NAME="testform" onSubmit=false; style=" flex-direction: column; display: flex; position: fixed; top:30vh; left: 25vw;">
+<p style="width:50vw; height: 2vh; font-size: 40px;">請輸入密碼：</p>	
+<input type="password" NAME="passwordField" style="width: 50vw; height: 8vh; ">
+<input type="button" NAME="button" Value="查核" onClick="testEncode(this.form)" style="width: 50vw; height: 10vh; margin-top:5vh;">
+</form>
+
+
+
+</body>
+</html>
